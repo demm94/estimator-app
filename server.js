@@ -16,7 +16,7 @@ require('./hbs/helpers');
 app.set('view engine', 'hbs');
 
 const dax = async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto('https://es.investing.com/indices/germany-30', { waitUntil: 'domcontentloaded' });
     const dax = await page.evaluate(() => {
@@ -28,7 +28,7 @@ const dax = async () => {
 };
 
 const acwi = async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto('https://es.investing.com/etfs/ishares-msci-acwi-index-fund', { waitUntil: 'domcontentloaded' });
     const acwi = await page.evaluate(() => {
@@ -40,7 +40,7 @@ const acwi = async () => {
 };
 
 const sp500 = async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto('https://es.investing.com/indices/us-spx-500', { waitUntil: 'domcontentloaded' });
     const sp500 = await page.evaluate(() => {
@@ -52,7 +52,7 @@ const sp500 = async () => {
 };
 
 const nasdaq = async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto('https://es.investing.com/indices/nq-100', { waitUntil: 'domcontentloaded' });
     const nasdaq = await page.evaluate(() => {
