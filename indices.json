@@ -1,0 +1,48 @@
+[
+    {
+        "name": "investing",
+        "url": "https://es.investing.com/indices/world-indices",
+        "indices": [
+            {
+                "name": "nikkei",
+                "selector": "td.pid-178-pcp"
+            },
+            {
+                "name": "shanghai",
+                "selector": "td.pid-40820-pcp"
+            },
+            {
+                "name": "dax",
+                "selector": "td.pid-172-pcp"
+            },
+            {
+                "name": "eurostoxx",
+                "selector": "td.pid-175-pcp"
+            },
+            {
+                "name": "sp",
+                "selector": "td.pid-14767-pcp"
+            }
+        ]
+    },
+    {
+        "name": "bolchile",
+        "url": "https://www.bolchile.com/dolar-public#dolar-public",
+        "indices": [
+            {
+                "name": "dolarAvg",
+                "selector": "#dolarDetail > div.col.s12.l4 > div.row.white > table > tbody > tr:nth-child(4) > td.ng-binding.ng-scope.unter-cero"
+            }
+        ]
+    },
+    {
+        "name": "iShares ACWI",
+        "url": "https://es.investing.com/etfs/ishares-msci-acwi-index-fund",
+        "indices": [
+            {
+                "name": "acwi",
+                "selector": "span.pid-40659-pcp"
+            }
+        ]
+    }
+]

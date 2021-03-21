@@ -3,6 +3,9 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const puppeteer = require('puppeteer');
+const websites = require('./indices.json');
+const fs = require('fs');
+const dataRead = require('./data.json');
 
 const port = process.env.PORT || 3000;
 
@@ -84,6 +87,42 @@ const suma = async () => {
     return DAX + ACWI + SP500 + NASDAQ;
 };
 
+(async () => {
+    const browser = await puppeteer.launch({
+        headless: false,
+        args: ['--no-sandbox','--disable-setuid-sandbox']
+    });
+    const page = await browser.newPage({waitUntil: 'domcontentloaded'});
+    let count = 0;
+    let total = websites.length;
+    let data = {};
+    for(const web of websites){
+        await page.goto(web.url);
+        for(const indice of web.indices){
+            await page.waitForSelector(indice.selector);
+            const parametro = indice.selector;
+            const value = await page.evaluate((parametro) => {
+                console.log("holaaaa XD");
+                const value = document.querySelector(parametro).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                return parseFloat(value);
+            }, parametro);
+            console.log(indice.name + `: ${value}`);
+            data[indice.name] = value;
+        }
+        console.log("contador: ",count);
+        count++;
+    }
+    if(count == total){
+        console.log("Cierrate browser");
+        await browser.close();
+        console.log(data);
+    }
+    const fileName = 'data.json';
+    fs.writeFile(fileName, JSON.stringify(data), (err) => {
+        if (err) throw new Error('Error al grabar', err);
+    });
+})();
+
 app.get('/', function (req, res) {
     //dax().then( value => console.log(value));
     //usd().then( value => console.log(value));
@@ -97,7 +136,7 @@ app.get('/sumar', function (req, res) {
     //usd().then( value => console.log(value));
     suma().then( value => {
         res.render('home', {
-            value
+            
         });
     });    
     //res.sendFile(path.join(__dirname + '/index.html'));
@@ -133,6 +172,12 @@ app.get('/nasdaq', function (req, res) {
         res.json({
             nasdaq: value
         });
+    });
+});
+
+app.get('/data', function (req, res) {
+    res.status(200).json({
+        data: dataRead
     });
 });
  
