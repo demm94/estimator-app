@@ -87,7 +87,7 @@ const suma = async () => {
     return DAX + ACWI + SP500 + NASDAQ;
 };
 
-(async () => {
+const scraper = async () => {
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox','--disable-setuid-sandbox']
@@ -121,7 +121,10 @@ const suma = async () => {
     fs.writeFile(fileName, JSON.stringify(data), (err) => {
         if (err) throw new Error('Error al grabar', err);
     });
-})();
+    console.log("SCRAPER DONE!");
+};
+
+setInterval(scraper, 120000);
 
 app.get('/', function (req, res) {
     //dax().then( value => console.log(value));
