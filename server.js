@@ -96,6 +96,7 @@ const scraper = async () => {
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
     const page = await browser.newPage({waitUntil: 'domcontentloaded'});
+    await page.setDefaultNavigationTimeout(0)
     let count = 0;
     let total = websites.length;
     let data = {};
@@ -143,7 +144,7 @@ function estimatorA(data){
     estimators.estimatorA = resultado.toFixed(3);
 }
 
-setInterval(scraper, 120000);
+setInterval(scraper, 180000);
 
 app.get('/', function (req, res) {
     res.render('home');
