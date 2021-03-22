@@ -106,7 +106,6 @@ const scraper = async () => {
             await page.waitForSelector(indice.selector);
             const parametro = indice.selector;
             const value = await page.evaluate((parametro) => {
-                console.log("holaaaa XD");
                 const value = document.querySelector(parametro).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
                 return parseFloat(value);
             }, parametro);
@@ -136,6 +135,12 @@ const scraper = async () => {
     console.log("SCRAPER DONE!");
 };
 
+setInterval(function (){
+    scraper().catch(error => { 
+        console.error("Something bad happend in SCRAPER", error); 
+    });
+}, 50000);
+
 function estimatorA(data){
     let resultado = (((((((((data.nikkei+data.shanghai)/2)*1.2+data.dax*0.5+data.eurostoxx*0.5)/2)+data.acwi)/2)+data.dolarAvg)*0.67)+0.18*data.dolarAvg+0.15*data.sp+((data.acwi+data.dolarAvg)/2+data.sp/6))/2;
     io.sockets.emit('estimatorA', {
@@ -143,8 +148,6 @@ function estimatorA(data){
     });
     estimators.estimatorA = resultado.toFixed(3);
 }
-
-setInterval(scraper, 180000);
 
 app.get('/', function (req, res) {
     res.render('home');
