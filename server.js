@@ -5,7 +5,10 @@ const hbs = require('hbs');
 const puppeteer = require('puppeteer');
 const websites = require('./indices.json');
 const fs = require('fs');
-const dataRead = require('./data.json');
+let db;
+let estimators = {
+    "estimatorA": 0
+}
 
 const port = process.env.PORT || 3000;
 
@@ -117,73 +120,55 @@ const scraper = async () => {
         await browser.close();
         console.log(data);
     }
-    const fileName = 'data.json';
+    /* const fileName = 'data.json';
     fs.writeFile(fileName, JSON.stringify(data), (err) => {
         if (err) throw new Error('Error al grabar', err);
+
+    }); */
+
+    // Escribo a todos los sockets
+    io.sockets.emit('test:message', {
+        data: data
     });
+    estimatorA(data);
+    db = data;
     console.log("SCRAPER DONE!");
 };
+
+function estimatorA(data){
+    let resultado = (((((((((data.nikkei+data.shanghai)/2)*1.2+data.dax*0.5+data.eurostoxx*0.5)/2)+data.acwi)/2)+data.dolarAvg)*0.67)+0.18*data.dolarAvg+0.15*data.sp+((data.acwi+data.dolarAvg)/2+data.sp/6))/2;
+    io.sockets.emit('estimatorA', {
+        data: resultado.toFixed(3)
+    });
+    estimators.estimatorA = resultado.toFixed(3);
+}
 
 setInterval(scraper, 120000);
 
 app.get('/', function (req, res) {
-    //dax().then( value => console.log(value));
-    //usd().then( value => console.log(value));
-    //suma().then( value => console.log(value));    
-    //res.sendFile(path.join(__dirname + '/index.html'));
     res.render('home');
-});
-
-app.get('/sumar', function (req, res) {
-    //dax().then( value => console.log(value));
-    //usd().then( value => console.log(value));
-    suma().then( value => {
-        res.render('home', {
-            
-        });
-    });    
-    //res.sendFile(path.join(__dirname + '/index.html'));
-    
-});
-
-app.get('/dax', function (req, res) {
-    dax().then(value => {
-        res.status(200).json({
-            dax: value
-        });
-    }).catch(error => console.log('Error DAX' + error));
-});
-
-app.get('/acwi', function (req, res) {
-    acwi().then(value => {
-        res.json({
-            acwi: value
-        });
-    });
-});
-
-app.get('/sp500', function (req, res) {
-    sp500().then(value => {
-        res.json({
-            sp500: value
-        });
-    });
-});
-
-app.get('/nasdaq', function (req, res) {
-    nasdaq().then(value => {
-        res.json({
-            nasdaq: value
-        });
-    });
 });
 
 app.get('/data', function (req, res) {
     res.status(200).json({
-        data: dataRead
+        data: db
+    });
+});
+
+app.get('/estimatorA', function (req, res) {
+    res.status(200).json({
+        data: estimators.estimatorA
     });
 });
  
-app.listen(port);
+const server = app.listen(port);
 
 console.log(`Running at port ${port}`);
+
+const SocketIO = require('socket.io');
+const io = SocketIO(server);    // pasamos el servidor a SocketIO
+
+// Websockets
+io.on('connection', (socket) => {
+    console.log("New Connection ", socket.id);
+});
