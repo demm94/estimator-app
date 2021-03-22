@@ -44,5 +44,47 @@
                 "selector": "span.pid-40659-pcp"
             }
         ]
+    },
+    {
+        "name": "Estrategia Activa",
+        "url": "http://estrategiaactiva.cl/estactiva/estimacionpublica.php",
+        "indices": [
+            {
+                "name": "estActivaA",
+                "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)"
+            },
+            {
+                "name": "estActivaE",
+                "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)"
+            }
+        ]
+    },
+    {
+        "name": "ACFondos",
+        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSW914EnnbhZBHJl65ncn6sHvA-Knfya8F_RShB9nfSEN3-iceISKemlmfyB6esspk09eYdY8bo77Lz/pubhtml#",
+        "indices": [
+            {
+                "name": "acfondosA",
+                "selector": "td.s6"
+            },
+            {
+                "name": "acfondosE",
+                "selector": "td.s25"
+            }
+        ]
+    },
+    {
+        "name": "AEFP",
+        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSE5SrT4WwR-alw4zu6fNDdHCFDeQ4BechZx37Oe-LetAGz13nLMmgFIDHefK1IFrZtTWThsNOZ7AVF/pubhtml",
+        "indices": [
+            {
+                "name": "aefpA",
+                "selector": "td.s12"
+            },
+            {
+                "name": "aefpE",
+                "selector": "td.s15"
+            }
+        ]
     }
 ]
