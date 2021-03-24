@@ -92,7 +92,7 @@ const suma = async () => {
 
 const scraper = async () => {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
     const page = await browser.newPage({waitUntil: 'domcontentloaded'});
@@ -139,7 +139,7 @@ setInterval(function (){
     scraper().catch(error => { 
         console.error("Something bad happend in SCRAPER", error); 
     });
-}, 50000);
+}, 60000);
 
 function estimatorA(data){
     let resultado = (((((((((data.nikkei+data.shanghai)/2)*1.2+data.dax*0.5+data.eurostoxx*0.5)/2)+data.acwi)/2)+data.dolarAvg)*0.67)+0.18*data.dolarAvg+0.15*data.sp+((data.acwi+data.dolarAvg)/2+data.sp/6))/2;

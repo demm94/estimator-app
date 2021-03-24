@@ -31,7 +31,7 @@
         "indices": [
             {
                 "name": "dolarAvg",
-                "selector": "#dolarDetail > div.col.s12.l4 > div.row.white > table > tbody > tr:nth-child(4) > td.ng-binding.ng-scope.unter-cero"
+                "selector": "#dolarDetail > div.col.s12.l4 > div.row.white > table > tbody > tr:nth-child(4) > td.ng-binding.ng-scope"
             }
         ]
     },
@@ -69,7 +69,7 @@
             },
             {
                 "name": "acfondosE",
-                "selector": "td.s25"
+                "selector": "td.s24"
             }
         ]
     },
