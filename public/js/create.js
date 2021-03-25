@@ -3,7 +3,7 @@ const socket = io();
 const message = document.getElementById('message');
 
 socket.on('test:message', function (response) {
-    console.log(response);
+    document.querySelector('#time-update span').innerHTML = `Última actualización: ${response.data.time}`;
     $("#index-rows").empty();
     $("#estimadores1").empty();
     $("#estimadores2").empty();
@@ -62,7 +62,7 @@ $.ajax({
     beforeSend: function () {
     },
     success: function (response) {
-        const data = response.data;
+        document.querySelector('#time-update span').innerHTML = `Última actualización: ${response.data.time}`;
         for (var [name, value] of Object.entries(response.data.bolsa)) {
             let indicador;
             if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;

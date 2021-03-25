@@ -5,9 +5,10 @@ const hbs = require('hbs');
 const puppeteer = require('puppeteer');
 const websites = require('./indices.json');
 const fs = require('fs');
-const db = require('./data.json');
 let dbBolsa;
 let dbEstimadores;
+
+//console.log(new Date().toLocaleTimeString());
 
 const port = process.env.PORT || 3000;
 
@@ -63,7 +64,8 @@ const scraper = async () => {
     fs.writeFile(fileName, JSON.stringify({
         bolsa,
         estimadores,
-        estimadores2
+        estimadores2,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }), (err) => {
         if (err) throw new Error('Error al grabar', err);
     });
@@ -73,7 +75,8 @@ const scraper = async () => {
         data: {
             bolsa,
             estimadores,
-            estimadores2
+            estimadores2,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
     });
     //estimatorA(bolsa);
@@ -86,7 +89,7 @@ setInterval(function (){
     scraper().catch(error => { 
         console.error("Something bad happend in SCRAPER", error); 
     });
-}, 60000);
+}, 50000);
 
 const estimatorA = (bolsa) => {
     let resultado = (((((((((bolsa.nikkei+bolsa.shanghai)/2)*1.2+bolsa.dax*0.5+bolsa.eurostoxx*0.5)/2)+bolsa.acwi)/2)+bolsa.dolarAvg)*0.67)+0.18*bolsa.dolarAvg+0.15*bolsa.syp+((bolsa.acwi+bolsa.dolarAvg)/2+bolsa.syp/6))/2;
@@ -101,6 +104,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/data', function (req, res) {
+    const db = require('./data.json');
     res.status(200).json({
         data: db
     });
