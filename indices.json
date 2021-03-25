@@ -5,33 +5,28 @@
         "indices": [
             {
                 "name": "nikkei",
+                "type": "bolsa",
                 "selector": "td.pid-178-pcp"
             },
             {
                 "name": "shanghai",
+                "type": "bolsa",
                 "selector": "td.pid-40820-pcp"
             },
             {
                 "name": "dax",
+                "type": "bolsa",
                 "selector": "td.pid-172-pcp"
             },
             {
                 "name": "eurostoxx",
+                "type": "bolsa",
                 "selector": "td.pid-175-pcp"
             },
             {
-                "name": "sp",
+                "name": "syp",
+                "type": "bolsa",
                 "selector": "td.pid-14767-pcp"
-            }
-        ]
-    },
-    {
-        "name": "bolchile",
-        "url": "https://www.bolchile.com/dolar-public#dolar-public",
-        "indices": [
-            {
-                "name": "dolarAvg",
-                "selector": "#dolarDetail > div.col.s12.l4 > div.row.white > table > tbody > tr:nth-child(4) > td.ng-binding.ng-scope"
             }
         ]
     },
@@ -41,6 +36,7 @@
         "indices": [
             {
                 "name": "acwi",
+                "type": "bolsa",
                 "selector": "span.pid-40659-pcp"
             }
         ]
@@ -51,10 +47,12 @@
         "indices": [
             {
                 "name": "estActivaA",
+                "type": "estimador",
                 "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)"
             },
             {
                 "name": "estActivaE",
+                "type": "estimador",
                 "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)"
             }
         ]
@@ -65,10 +63,12 @@
         "indices": [
             {
                 "name": "acfondosA",
+                "type": "estimador",
                 "selector": "td.s6"
             },
             {
                 "name": "acfondosE",
+                "type": "estimador",
                 "selector": "td.s24"
             }
         ]
@@ -79,11 +79,18 @@
         "indices": [
             {
                 "name": "aefpA",
+                "type": "estimador",
                 "selector": "td.s12"
             },
             {
                 "name": "aefpE",
+                "type": "estimador",
                 "selector": "td.s15"
+            },
+            {
+                "name": "dolarAvg",
+                "type": "bolsa",
+                "selector": "td.s109"
             }
         ]
     }
