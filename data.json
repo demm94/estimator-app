@@ -1,1 +1,1 @@
-{"bolsa":{"nikkei":1.14,"shanghai":-0.1,"dax":-0.06,"eurostoxx":-0.17,"syp":0.82,"acwi":-0.83,"dolarAvg":0.35},"estimadores":{"estActivaA":-0.43,"estActivaE":0.05,"acfondosA":-0.24,"acfondosE":0.17,"aefpA":-0.32,"aefpE":0.06},"estimadores2":{"estimadorA1":"0.062"},"time":"05:34"}
+{"bolsa":{"nikkei":1.14,"shanghai":-0.1,"dax":0.08,"eurostoxx":0,"syp":-1.54,"acwi":0.5,"dolarAvg":1.08,"dolarHolgura":-0.77},"estimadores":{"estActivaA":0.63,"estActivaE":-0.12,"acfondosA":0.6,"acfondosE":0.02,"aefpA":0.46,"aefpE":-0.43},"estimadores2":{"estimadorA1":"0.750"},"time":1616707756594}

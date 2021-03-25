@@ -8,7 +8,9 @@ const fs = require('fs');
 let dbBolsa;
 let dbEstimadores;
 
-//console.log(new Date().toLocaleTimeString());
+//const time = new Date().valueOf();
+//console.log(time);
+//console.log(new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
 
 const port = process.env.PORT || 3000;
 
@@ -65,7 +67,7 @@ const scraper = async () => {
         bolsa,
         estimadores,
         estimadores2,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        time: new Date().valueOf()
     }), (err) => {
         if (err) throw new Error('Error al grabar', err);
     });
@@ -76,7 +78,7 @@ const scraper = async () => {
             bolsa,
             estimadores,
             estimadores2,
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            time: new Date().valueOf()
         }
     });
     //estimatorA(bolsa);

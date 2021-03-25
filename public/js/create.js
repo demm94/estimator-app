@@ -3,10 +3,9 @@ const socket = io();
 const message = document.getElementById('message');
 
 socket.on('test:message', function (response) {
-    document.querySelector('#time-update span').innerHTML = `Última actualización: ${response.data.time}`;
-    $("#index-rows").empty();
-    $("#estimadores1").empty();
-    $("#estimadores2").empty();
+    const time = new Date(response.data.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
+    $("#index-rows").empty(); 
     for (var [name, value] of Object.entries(response.data.bolsa)) {
         let indicador;
         if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;
@@ -15,7 +14,7 @@ socket.on('test:message', function (response) {
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">${name.toUpperCase()}</h5>
+                    <h6 class="card-title">${name.toUpperCase()}</h6>
                     <p class="card-text">Variación: ${indicador}</p>
                     </div>
                 </div>
@@ -23,6 +22,7 @@ socket.on('test:message', function (response) {
         `);
     }
 
+    $("#estimadores1").empty();
     for (var [name, value] of Object.entries(response.data.estimadores)) {
         let indicador;
         if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;
@@ -31,7 +31,7 @@ socket.on('test:message', function (response) {
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">${name.toUpperCase()}</h5>
+                    <h6 class="card-title">${name.toUpperCase()}</h6>
                     <p class="card-text">Variación: ${indicador}</p>
                     </div>
                 </div>
@@ -39,6 +39,7 @@ socket.on('test:message', function (response) {
         `);
     }
 
+    $("#estimadores2").empty();
     for (var [name, value] of Object.entries(response.data.estimadores2)) {
         let indicador;
         if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;
@@ -47,7 +48,7 @@ socket.on('test:message', function (response) {
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                 <div class="card text-white bg-primary">
                     <div class="card-body">
-                    <h5 class="card-title">${name.toUpperCase()}</h5>
+                    <h6 class="card-title">${name.toUpperCase()}</h6>
                     <p class="card-text">Variación: ${indicador}</p>
                     </div>
                 </div>
@@ -62,7 +63,8 @@ $.ajax({
     beforeSend: function () {
     },
     success: function (response) {
-        document.querySelector('#time-update span').innerHTML = `Última actualización: ${response.data.time}`;
+        const time = new Date(response.data.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
         for (var [name, value] of Object.entries(response.data.bolsa)) {
             let indicador;
             if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;
@@ -71,7 +73,7 @@ $.ajax({
                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                     <div class="card">
                         <div class="card-body">
-                        <h5 class="card-title">${name.toUpperCase()}</h5>
+                        <h6 class="card-title">${name.toUpperCase()}</h6>
                         <p class="card-text">Variación: ${indicador}</p>
                         </div>
                     </div>
@@ -87,7 +89,7 @@ $.ajax({
                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                     <div class="card">
                         <div class="card-body">
-                        <h5 class="card-title">${name.toUpperCase()}</h5>
+                        <h6 class="card-title">${name.toUpperCase()}</h6>
                         <p class="card-text">Variación: ${indicador}</p>
                         </div>
                     </div>
@@ -103,7 +105,7 @@ $.ajax({
                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                     <div class="card text-white bg-primary">
                         <div class="card-body">
-                        <h5 class="card-title">${name.toUpperCase()}</h5>
+                        <h6 class="card-title">${name.toUpperCase()}</h6>
                         <p class="card-text">Variación: ${indicador}</p>
                         </div>
                     </div>

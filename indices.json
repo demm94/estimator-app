@@ -85,12 +85,17 @@
             {
                 "name": "aefpE",
                 "type": "estimador",
-                "selector": "td.s15"
+                "selector": "td.s16"
             },
             {
                 "name": "dolarAvg",
                 "type": "bolsa",
-                "selector": "td.s109"
+                "selector": "td.s110"
+            },
+            {
+                "name": "dolarHolgura",
+                "type": "bolsa",
+                "selector": "td.s117"
             }
         ]
     }
