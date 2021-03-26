@@ -15,7 +15,7 @@ let dbEstimadores;
 const port = process.env.PORT || 3000;
 
 // Archivos Estáticos
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Helpers
 require('./hbs/helpers');
@@ -68,7 +68,7 @@ const scraper = async () => {
     estimadores2["estimadorA1"] = estimadorA1;
 
     // SE ALMACENAN LOS DATOS EN UN FICHERO
-    const fileName = 'data.json';
+    const fileName = path.join(__dirname, 'data.json');
     fs.writeFile(fileName, JSON.stringify({
         bolsa,
         estimadores,
@@ -113,6 +113,8 @@ app.get('/', function (req, res) {
 
 app.get('/data', function (req, res) {
     const db = require('./data.json');
+    console.log("ENVIANDO DB");
+
     res.status(200).json({
         data: db
     });
