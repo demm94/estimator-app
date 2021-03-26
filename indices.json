@@ -5,26 +5,31 @@
         "indices": [
             {
                 "name": "nikkei",
+                "name2": "Nikkei 225",
                 "type": "bolsa",
                 "selector": "td.pid-178-pcp"
             },
             {
                 "name": "shanghai",
+                "name2": "Shanghai",
                 "type": "bolsa",
                 "selector": "td.pid-40820-pcp"
             },
             {
                 "name": "dax",
+                "name2": "DAX",
                 "type": "bolsa",
                 "selector": "td.pid-172-pcp"
             },
             {
                 "name": "eurostoxx",
+                "name2": "Euro Stoxx 50",
                 "type": "bolsa",
                 "selector": "td.pid-175-pcp"
             },
             {
                 "name": "syp",
+                "name2": "S&P 500",
                 "type": "bolsa",
                 "selector": "td.pid-14767-pcp"
             }
@@ -36,8 +41,57 @@
         "indices": [
             {
                 "name": "acwi",
+                "name2": "iShares MSCI ACWI",
                 "type": "bolsa",
                 "selector": "span.pid-40659-pcp"
+            }
+        ]
+    },
+    {
+        "name": "Petróleo Crudo WTI",
+        "url": "https://es.investing.com/commodities/crude-oil",
+        "indices": [
+            {
+                "name": "petroleoCrudo",
+                "name2": "Petróleo Crudo WTI",
+                "type": "bolsa",
+                "selector": "span.pid-8849-pcp"
+            }
+        ]
+    },
+    {
+        "name": "Cobre",
+        "url": "https://es.investing.com/commodities/copper",
+        "indices": [
+            {
+                "name": "cobre",
+                "name2": "Cobre",
+                "type": "bolsa",
+                "selector": "span.pid-8831-pcp"
+            }
+        ]
+    },
+    {
+        "name": "Índice Dólar",
+        "url": "https://es.investing.com/currencies/us-dollar-index",
+        "indices": [
+            {
+                "name": "indiceDolar",
+                "name2": "Índice Dólar",
+                "type": "bolsa",
+                "selector": "span.pid-8827-pcp"
+            }
+        ]
+    },
+    {
+        "name": "USD/CLP",
+        "url": "https://es.investing.com/currencies/usd-clp",
+        "indices": [
+            {
+                "name": "usdClp",
+                "name2": "USD/CLP",
+                "type": "bolsa",
+                "selector": "span.pid-2110-pcp"
             }
         ]
     },
@@ -47,11 +101,13 @@
         "indices": [
             {
                 "name": "estActivaA",
+                "name2": "EstActiva A",
                 "type": "estimador",
                 "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)"
             },
             {
                 "name": "estActivaE",
+                "name2": "EstActiva E",
                 "type": "estimador",
                 "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)"
             }
@@ -63,13 +119,15 @@
         "indices": [
             {
                 "name": "acfondosA",
+                "name2": "acfondos A",
                 "type": "estimador",
-                "selector": "td.s6"
+                "selector": "tr:nth-child(2) > td:nth-child(3)"
             },
             {
                 "name": "acfondosE",
+                "name2": "acfondos E",
                 "type": "estimador",
-                "selector": "td.s24"
+                "selector": "tr:nth-child(13) > td:nth-child(4)"
             }
         ]
     },
@@ -79,23 +137,27 @@
         "indices": [
             {
                 "name": "aefpA",
+                "name2": "AEfp A",
                 "type": "estimador",
                 "selector": "td.s12"
             },
             {
                 "name": "aefpE",
+                "name2": "AEfp E",
                 "type": "estimador",
                 "selector": "td.s16"
             },
             {
                 "name": "dolarAvg",
+                "name2": "Dólar Prom",
                 "type": "bolsa",
                 "selector": "td.s110"
             },
             {
                 "name": "dolarHolgura",
+                "name2": "Holgura",
                 "type": "bolsa",
-                "selector": "td.s117"
+                "selector": "tr:nth-child(64) > td.s118"
             }
         ]
     }

@@ -29,7 +29,7 @@ const scraper = async () => {
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
     const page = await browser.newPage({waitUntil: 'domcontentloaded'});
-    await page.setDefaultNavigationTimeout(0)
+    await page.setDefaultNavigationTimeout(0);
     let count = 0;
     let total = websites.length;
     let bolsa = {};
@@ -45,8 +45,14 @@ const scraper = async () => {
                 return parseFloat(value);
             }, parametro);
             console.log(indice.name + `: ${value}`);
-            if(indice.type == "bolsa") bolsa[indice.name] = value;
-            else estimadores[indice.name] = value;
+            if(indice.type == "bolsa") bolsa[indice.name] = {
+                value,
+                name: indice.name2
+            };
+            else estimadores[indice.name] = {
+                value,
+                name: indice.name2
+            };
         }
         console.log("contador: ",count);
         count++;
@@ -91,10 +97,10 @@ setInterval(function (){
     scraper().catch(error => { 
         console.error("Something bad happend in SCRAPER", error); 
     });
-}, 50000);
+}, 80000);
 
 const estimatorA = (bolsa) => {
-    let resultado = (((((((((bolsa.nikkei+bolsa.shanghai)/2)*1.2+bolsa.dax*0.5+bolsa.eurostoxx*0.5)/2)+bolsa.acwi)/2)+bolsa.dolarAvg)*0.67)+0.18*bolsa.dolarAvg+0.15*bolsa.syp+((bolsa.acwi+bolsa.dolarAvg)/2+bolsa.syp/6))/2;
+    let resultado = (((((((((bolsa.nikkei.value+bolsa.shanghai.value)/2)*1.2+bolsa.dax.value*0.5+bolsa.eurostoxx.value*0.5)/2)+bolsa.acwi.value)/2)+bolsa.dolarAvg.value)*0.67)+0.18*bolsa.dolarAvg.value+0.15*bolsa.syp.value+((bolsa.acwi.value+bolsa.dolarAvg.value)/2+bolsa.syp.value/6))/2;
     io.sockets.emit('estimatorA', {
         bolsa: resultado.toFixed(3)
     });
