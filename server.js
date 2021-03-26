@@ -112,11 +112,16 @@ app.get('/', function (req, res) {
 });
 
 app.get('/data', function (req, res) {
-    const db = require('./data.json');
-    console.log("ENVIANDO DB");
-
-    res.status(200).json({
-        data: db
+    const pathFile = path.join(__dirname, 'data.json')
+    fs.readFile(pathFile, 'utf8', function(err, data){
+        if(err){
+            res.status(400).json({
+                error: "Error al leer DB"
+            });
+        }
+        res.status(200).json({
+            data: JSON.parse(data)
+        });
     });
 });
  

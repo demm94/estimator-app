@@ -64,6 +64,7 @@ const updateData = () => {
         beforeSend: function () {
         },
         success: function (response) {
+            console.log(response);
             $("#index-rows").empty(); 
             const time = new Date(response.data.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
