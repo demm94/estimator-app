@@ -7,7 +7,7 @@
     <meta name="description" content="Visualizador de índices y estimador fondos AFP">
     <meta property="og:image" content="https://i.pinimg.com/originals/89/f9/71/89f971bd1cc00a0cd89c05cb348a2fb2.png">
     {{!-- CCS Bootstrap --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     {{!-- CSS Custom --}}
     <link rel="stylesheet" href="../css/custom.css">
@@ -23,7 +23,7 @@
     <header>
         <div id="time-update" class="text-center">
             <span class="badge rounded-pill bg-info text-dark">Última actualización: 05:23:12 </span>
-            <button class="btn btn-light btn-sm" id="btn-update">Actualizar</button>
+            <button class="btn btn-light btn-sm p-0" id="btn-update"><i class="bi bi-arrow-clockwise"></i></button>
         </div>
     </header>
     <div class="container-fluid">
@@ -43,6 +43,8 @@
     {{!-- Custom JS --}}
     {{!-- <script type="text/javascript" src="../js/dax.js"></script> --}}
     <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script>
     <script type="text/javascript" src="../js/create.js"></script>
+    <script type="text/javascript" src="../js/touch.js"></script>
 </body>
 </html>

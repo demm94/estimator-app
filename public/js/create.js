@@ -8,8 +8,8 @@ socket.on('test:message', function (response) {
         document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
         for (var [name, object] of Object.entries(response.data.bolsa)) {
             let indicador;
-            if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value}% <i class="bi bi-caret-up-fill"></i></span>`;
-            else indicador = `<span class="badge bg-danger">${object.value}% <i class="bi bi-caret-down-fill"></i></span>`;
+            if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+            else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
             $('#index-rows').append(`
                 <div class="col-3 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                     <div class="card text-center h-100">
@@ -25,14 +25,14 @@ socket.on('test:message', function (response) {
         $("#estimadores1").empty();
         for (var [name, object] of Object.entries(response.data.estimadores)) {
             let indicador;
-            if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value}%</span>`;
-            else indicador = `<span class="badge bg-danger">${object.value}%</span>`;
+            if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+            else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
             $('#estimadores1').append(`
                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                    <div class="card">
+                    <div class="card text-center">
                         <div class="card-body">
                         <h6 class="card-title">${object.name}</h6>
-                        <p class="card-text">Variación: ${indicador}</p>
+                        <p class="card-text">${indicador}</p>
                         </div>
                     </div>
                 </div>
@@ -40,16 +40,16 @@ socket.on('test:message', function (response) {
         }
 
     $("#estimadores2").empty();
-    for (var [name, value] of Object.entries(response.data.estimadores2)) {
+    for (var [name, object] of Object.entries(response.data.estimadores2)) {
         let indicador;
-        if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;
-        else indicador = `<span class="badge bg-danger">${value}%</span>`;
+        if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value}% <i class="bi bi-caret-up-fill"></i></span>`;
+        else indicador = `<span class="badge bg-danger">${object.value}% <i class="bi bi-caret-down-fill"></i></span>`;
         $('#estimadores2').append(`
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                <div class="card text-white bg-primary">
+                <div class="card text-center text-white bg-primary">
                     <div class="card-body">
-                    <h6 class="card-title">${name.toUpperCase()}</h6>
-                    <p class="card-text">Variación: ${indicador}</p>
+                    <h6 class="card-title">${object.name}</h6>
+                    <p class="card-text">${indicador}</p>
                     </div>
                 </div>
             </div>
@@ -70,8 +70,8 @@ const updateData = () => {
             document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
             for (var [name, object] of Object.entries(response.data.bolsa)) {
                 let indicador;
-                if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value}% <i class="bi bi-caret-up-fill"></i></span>`;
-                else indicador = `<span class="badge bg-danger">${object.value}% <i class="bi bi-caret-down-fill"></i></span>`;
+                if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
                 $('#index-rows').append(`
                     <div class="col-3 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                         <div class="card text-center h-100">
@@ -87,14 +87,14 @@ const updateData = () => {
             $("#estimadores1").empty();
             for (var [name, object] of Object.entries(response.data.estimadores)) {
                 let indicador;
-                if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value}%</span>`;
-                else indicador = `<span class="badge bg-danger">${object.value}%</span>`;
+                if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
                 $('#estimadores1').append(`
                     <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                        <div class="card">
+                        <div class="card text-center">
                             <div class="card-body">
                             <h6 class="card-title">${object.name}</h6>
-                            <p class="card-text">Variación: ${indicador}</p>
+                            <p class="card-text">${indicador}</p>
                             </div>
                         </div>
                     </div>
@@ -102,16 +102,16 @@ const updateData = () => {
             }
     
             $("#estimadores2").empty();
-            for (var [name, value] of Object.entries(response.data.estimadores2)) {
+            for (var [name, object] of Object.entries(response.data.estimadores2)) {
                 let indicador;
-                if(value >= 0) indicador = `<span class="badge bg-success">${value}%</span>`;
-                else indicador = `<span class="badge bg-danger">${value}%</span>`;
+                if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${object.value}% <i class="bi bi-caret-down-fill"></i></span>`;
                 $('#estimadores2').append(`
                     <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                        <div class="card text-white bg-primary">
+                        <div class="card text-center text-white bg-primary">
                             <div class="card-body">
-                            <h6 class="card-title">${name.toUpperCase()}</h6>
-                            <p class="card-text">Variación: ${indicador}</p>
+                            <h6 class="card-title">${object.name}</h6>
+                            <p class="card-text">${indicador}</p>
                             </div>
                         </div>
                     </div>

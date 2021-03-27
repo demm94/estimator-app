@@ -158,6 +158,48 @@
                 "name2": "Holgura",
                 "type": "bolsa",
                 "selector": "tr:nth-child(64) > td.s118"
+            },
+            {
+                "name": "bcu10Actual",
+                "name2": "Tasa BCU 10 Actual",
+                "type": "otros",
+                "selector": "tr:nth-child(60) > td:nth-child(8)"
+            },
+            {
+                "name": "bcu10Anterior",
+                "name2": "Tasa BCU 10 Anterior",
+                "type": "otros",
+                "selector": "tr:nth-child(60) > td:nth-child(7)"
+            },
+            {
+                "name": "bcu5var",
+                "name2": "BCU 5 Var",
+                "type": "otros",
+                "selector": "tr:nth-child(58) > td:nth-child(9)"
+            },
+            {
+                "name": "bcu10var",
+                "name2": "BCU 10 Var",
+                "type": "otros",
+                "selector": "tr:nth-child(60) > td:nth-child(9)"
+            },
+            {
+                "name": "bcu20var",
+                "name2": "BCU 20 Var",
+                "type": "otros",
+                "selector": "tr:nth-child(62) > td:nth-child(9)"
+            }
+        ]
+    },
+    {
+        "name": "Bonos Estado Chile",
+        "url": "https://es.investing.com/rates-bonds/chile-government-bonds",
+        "indices": [
+            {
+                "name": "chile10A",
+                "name2": "Chile 10A",
+                "type": "otros",
+                "selector": "td.pid-29214-pc"
             }
         ]
     }
