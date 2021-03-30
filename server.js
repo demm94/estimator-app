@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -5,14 +6,29 @@ const hbs = require('hbs');
 const puppeteer = require('puppeteer');
 const websites = require('./indices.json');
 const fs = require('fs');
-let dbBolsa;
-let dbEstimadores;
 
-//const time = new Date().valueOf();
-//console.log(time);
-//console.log(new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+// CONEXIÓN A BASE DE DATOS
+const mongoose = require('mongoose');
 
-const port = process.env.PORT || 3000;
+mongoose.connect(process.env.MONGO_DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology:true
+})
+.then(() => console.log('Base de datos conectada'))
+.catch((e) => console.log(e));
+
+const Fondo = require('./models/fondo');
+
+/* Fondo.find({})
+    .limit(12)
+    .exec((err, data) => {
+        if(err) console.log(err);
+        io.sockets.emit('data:chart', {
+            data
+        });
+    });  */
+
+const port = process.env.PORT;
 
 // Archivos Estáticos
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,16 +56,22 @@ const scraper = async () => {
         await page.goto(web.url);
         for(const indice of web.indices){
             await page.waitForSelector(indice.selector);
-            const parametro = indice.selector;
-            const value = await page.evaluate((parametro) => {
-                const value = document.querySelector(parametro).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
-                return parseFloat(value);
-            }, parametro);
-            console.log(indice.name + `: ${value}`);
+            const {value, isClose} = await page.evaluate((indice) => {
+                const value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                let isClose;
+                if(indice.type == "bolsa" && indice.selectorClose !== null) isClose = $(indice.selectorClose).exists();
+                else isClose = null;
+                return {
+                    value: parseFloat(value),
+                    isClose
+                }
+            }, indice);
+            console.log(indice.name + `: ${value} - ${isClose}`);
             if(indice.type == "bolsa") {
                 bolsa[indice.name] = {
                     value,
-                    name: indice.name2
+                    name: indice.name2,
+                    isClose
                 };
             }
             else if(indice.type == "estimador"){
@@ -94,6 +116,9 @@ const scraper = async () => {
         value: estimatorE2(otros)
     };
 
+    // SE OBTIENE UN TIEMPO APROXIMADO DE TOMA DE DATA
+    const time = new Date().valueOf();
+
     // SE ALMACENAN LOS DATOS EN UN FICHERO
     const fileName = path.join(__dirname, 'data.json');
     fs.writeFile(fileName, JSON.stringify({
@@ -101,9 +126,29 @@ const scraper = async () => {
         estimadores,
         estimadores2,
         otros,
-        time: new Date().valueOf()
+        time
     }), (err) => {
         if (err) throw new Error('Error al grabar', err);
+    });
+
+    // CREAMOS UN OBJETO FONDO
+    Fondo.create({
+        aefpa: estimadores.aefpA.value,
+        estacta: estimadores.estActivaA.value,
+        time
+        }, (e, obj) => {
+            if(e) console.log(e);
+            // Ya creado el bojeto fondo
+            // Escribo la data en socket para gráfico
+            Fondo.find({}, 'aefpa estacta time')
+            .sort({_id: -1})
+            .limit(40)
+            .exec((err, data) => {
+                if(err) console.log(err);
+                io.sockets.emit('data:chart', {
+                    data: data.reverse()
+                });
+            })
     });
 
     // Escribo a todos los sockets
@@ -113,12 +158,10 @@ const scraper = async () => {
             estimadores,
             estimadores2,
             otros,
-            time: new Date().valueOf()
+            time
         }
     });
-    //estimatorA(bolsa);
-    dbBolsa = bolsa;
-    dbEstimadores = estimadores;
+
     console.log("SCRAPER DONE!");
 };
 
@@ -126,10 +169,10 @@ setInterval(function (){
     scraper().catch(error => { 
         console.error("Something bad happend in SCRAPER", error); 
     });
-}, 100000);
+}, process.env.TIME_EXECUTE);
 
 const estimatorA1 = (bolsa) => {
-    let resultado = (((((((((bolsa.nikkei.value+bolsa.shanghai.value)/2)*1.2+bolsa.dax.value*0.5+bolsa.eurostoxx.value*0.5)/2)+bolsa.acwi.value)/2)+bolsa.dolarAvg.value)*0.67)+0.18*bolsa.dolarAvg.value+0.15*bolsa.syp.value+((bolsa.acwi.value+bolsa.dolarAvg.value)/2+bolsa.syp.value/6))/2;
+    let resultado = (((((((((bolsa.nikkei.value+bolsa.shanghai.value)/2)*1.2+bolsa.dax.value*0.5+bolsa.eurostoxx.value*0.5)/2)+bolsa.acwi.value)/2)+bolsa.dolarAvg.value)*0.67)+0.18*bolsa.dolarAvg.value+0.15*bolsa.ipsa.value+((bolsa.acwi.value+bolsa.dolarAvg.value)/2+bolsa.ipsa.value/6))/2;
     io.sockets.emit('estimatorA', {
         bolsa: resultado
     });
@@ -137,7 +180,7 @@ const estimatorA1 = (bolsa) => {
 }
 
 const estimatorA2 = (data) => {
-    let resultado = 0.401*data.dolarAvg.value+0.099*((data.nikkei.value+data.shanghai.value)/2)+0.07*data.dax.value+0.056*data.eurostoxx.value+0.282*data.acwi.value+0.099*data.syp.value;
+    let resultado = 0.401*data.dolarAvg.value+0.099*((data.nikkei.value+data.shanghai.value)/2)+0.07*data.dax.value+0.056*data.eurostoxx.value+0.282*data.acwi.value+0.099*data.ipsa.value;
     return resultado.toFixed(2);
 }
 
@@ -167,6 +210,22 @@ app.get('/data', function (req, res) {
             data: JSON.parse(data)
         });
     });
+});
+
+app.get('/fondos', function (req, res) {
+    Fondo.find({}, 'aefpa estacta time')
+        .sort({_id: -1})
+        .limit(40)
+        .exec((err, data) => {
+            if(err) {
+                res.status(400).json({
+                    err
+                });
+            };
+            res.status(200).json({
+                data: data.reverse()
+            })
+        })
 });
  
 const server = app.listen(port);

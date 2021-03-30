@@ -8,14 +8,21 @@ socket.on('test:message', function (response) {
         document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
         for (var [name, object] of Object.entries(response.data.bolsa)) {
             let indicador;
+            let clock;
+
+            if(object.isClose == true) clock = `<i style="font-size: 0.8rem; color: red;" class="bi bi-clock"></i>`;
+            else if(object.isClose == false) clock = `<i style="font-size: 0.8rem; color: green" class="bi bi-clock"></i>`;
+            else clock = "";
+
             if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
             else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
             $('#index-rows').append(`
-                <div class="col-3 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
+                <div class="col-3 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                     <div class="card text-center h-100">
                         <div class="card-body py-2 px-0">
                         <h6 class="card-title">${object.name}</h6>
                         ${indicador}
+                        ${clock}
                         </div>
                     </div>
                 </div>
@@ -64,20 +71,26 @@ const updateData = () => {
         beforeSend: function () {
         },
         success: function (response) {
-            console.log(response);
             $("#index-rows").empty(); 
             const time = new Date(response.data.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             document.querySelector('#time-update span').innerHTML = `Última actualización: ${time}`;
             for (var [name, object] of Object.entries(response.data.bolsa)) {
                 let indicador;
+                let clock;
+
+                if(object.isClose == true) clock = `<i style="font-size: 0.8rem; color: red;" class="bi bi-clock"></i>`;
+                else if(object.isClose == false) clock = `<i style="font-size: 0.8rem; color: green" class="bi bi-clock"></i>`;
+                else clock = "";
+
                 if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
                 else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
                 $('#index-rows').append(`
-                    <div class="col-3 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
+                    <div class="col-3 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                         <div class="card text-center h-100">
                             <div class="card-body py-2 px-0">
                             <h6 class="card-title">${object.name}</h6>
                             ${indicador}
+                            ${clock}
                             </div>
                         </div>
                     </div>
@@ -130,4 +143,5 @@ const btnUpdate = document.getElementById('btn-update');
 btnUpdate.addEventListener('click', () => {
     console.log("click");
     updateData();
+    updateDataChart();
 });

@@ -7,31 +7,36 @@
                 "name": "nikkei",
                 "name2": "Nikkei 225",
                 "type": "bolsa",
-                "selector": "td.pid-178-pcp"
+                "selector": "td.pid-178-pcp",
+                "selectorClose": "#pair_178 > td.icon > span.redClockIcon"
             },
             {
                 "name": "shanghai",
                 "name2": "Shanghai",
                 "type": "bolsa",
-                "selector": "td.pid-40820-pcp"
+                "selector": "td.pid-40820-pcp",
+                "selectorClose": "#pair_40820 > td.icon > span.redClockIcon"
             },
             {
                 "name": "dax",
                 "name2": "DAX",
                 "type": "bolsa",
-                "selector": "td.pid-172-pcp"
+                "selector": "td.pid-172-pcp",
+                "selectorClose": "#pair_172 > td.icon > span.redClockIcon"
             },
             {
                 "name": "eurostoxx",
                 "name2": "Euro Stoxx 50",
                 "type": "bolsa",
-                "selector": "td.pid-175-pcp"
+                "selector": "td.pid-175-pcp",
+                "selectorClose": "#pair_175 > td.icon > span.redClockIcon"
             },
             {
-                "name": "syp",
-                "name2": "S&P 500",
+                "name": "ipsa",
+                "name2": "S&P CLX IPSA",
                 "type": "bolsa",
-                "selector": "td.pid-14767-pcp"
+                "selector": "td.pid-14767-pcp",
+                "selectorClose": "#pair_14767 > td.icon > span.redClockIcon"
             }
         ]
     },
@@ -43,7 +48,8 @@
                 "name": "acwi",
                 "name2": "iShares MSCI ACWI",
                 "type": "bolsa",
-                "selector": "span.pid-40659-pcp"
+                "selector": "span.pid-40659-pcp",
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
             }
         ]
     },
@@ -55,7 +61,8 @@
                 "name": "petroleoCrudo",
                 "name2": "Petróleo Crudo WTI",
                 "type": "bolsa",
-                "selector": "span.pid-8849-pcp"
+                "selector": "span.pid-8849-pcp",
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
             }
         ]
     },
@@ -67,7 +74,8 @@
                 "name": "cobre",
                 "name2": "Cobre",
                 "type": "bolsa",
-                "selector": "span.pid-8831-pcp"
+                "selector": "span.pid-8831-pcp",
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
             }
         ]
     },
@@ -79,7 +87,8 @@
                 "name": "indiceDolar",
                 "name2": "Índice Dólar",
                 "type": "bolsa",
-                "selector": "span.pid-8827-pcp"
+                "selector": "span.pid-8827-pcp",
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
             }
         ]
     },
@@ -91,73 +100,40 @@
                 "name": "usdClp",
                 "name2": "USD/CLP",
                 "type": "bolsa",
-                "selector": "span.pid-2110-pcp"
-            }
-        ]
-    },
-    {
-        "name": "Estrategia Activa",
-        "url": "http://estrategiaactiva.cl/estactiva/estimacionpublica.php",
-        "indices": [
-            {
-                "name": "estActivaA",
-                "name2": "EstActiva A",
-                "type": "estimador",
-                "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)"
-            },
-            {
-                "name": "estActivaE",
-                "name2": "EstActiva E",
-                "type": "estimador",
-                "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)"
-            }
-        ]
-    },
-    {
-        "name": "ACFondos",
-        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSW914EnnbhZBHJl65ncn6sHvA-Knfya8F_RShB9nfSEN3-iceISKemlmfyB6esspk09eYdY8bo77Lz/pubhtml#",
-        "indices": [
-            {
-                "name": "acfondosA",
-                "name2": "acfondos A",
-                "type": "estimador",
-                "selector": "tr:nth-child(2) > td:nth-child(3)"
-            },
-            {
-                "name": "acfondosE",
-                "name2": "acfondos E",
-                "type": "estimador",
-                "selector": "tr:nth-child(13) > td:nth-child(4)"
+                "selector": "span.pid-2110-pcp",
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
             }
         ]
     },
     {
         "name": "AEFP",
-        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSE5SrT4WwR-alw4zu6fNDdHCFDeQ4BechZx37Oe-LetAGz13nLMmgFIDHefK1IFrZtTWThsNOZ7AVF/pubhtml",
+        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSE5SrT4WwR-alw4zu6fNDdHCFDeQ4BechZx37Oe-LetAGz13nLMmgFIDHefK1IFrZtTWThsNOZ7AVF/pubhtml?gid=915819026&single=true",
         "indices": [
             {
                 "name": "aefpA",
                 "name2": "AEfp A",
                 "type": "estimador",
-                "selector": "td.s12"
+                "selector": "tr:nth-child(5) > td:nth-child(4)"
             },
             {
                 "name": "aefpE",
                 "name2": "AEfp E",
                 "type": "estimador",
-                "selector": "td.s16"
+                "selector": "tr:nth-child(9) > td:nth-child(4)"
             },
             {
                 "name": "dolarAvg",
                 "name2": "Dólar Prom",
                 "type": "bolsa",
-                "selector": "td.s110"
+                "selector": "tr:nth-child(56) > td:nth-child(4)",
+                "selectorClose": null
             },
             {
                 "name": "dolarHolgura",
                 "name2": "Holgura",
                 "type": "bolsa",
-                "selector": "tr:nth-child(64) > td.s118"
+                "selector": "tr:nth-child(64) > td:nth-child(4)",
+                "selectorClose": null
             },
             {
                 "name": "bcu10Actual",
@@ -188,6 +164,42 @@
                 "name2": "BCU 20 Var",
                 "type": "otros",
                 "selector": "tr:nth-child(62) > td:nth-child(9)"
+            }
+        ]
+    },
+    {
+        "name": "ACFondos",
+        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSW914EnnbhZBHJl65ncn6sHvA-Knfya8F_RShB9nfSEN3-iceISKemlmfyB6esspk09eYdY8bo77Lz/pubhtml#",
+        "indices": [
+            {
+                "name": "acfondosA",
+                "name2": "acfondos A",
+                "type": "estimador",
+                "selector": "tr:nth-child(2) > td:nth-child(3)"
+            },
+            {
+                "name": "acfondosE",
+                "name2": "acfondos E",
+                "type": "estimador",
+                "selector": "tr:nth-child(13) > td:nth-child(4)"
+            }
+        ]
+    },
+    {
+        "name": "Estrategia Activa",
+        "url": "http://estrategiaactiva.cl/estactiva/estimacionpublica.php",
+        "indices": [
+            {
+                "name": "estActivaA",
+                "name2": "EstActiva A",
+                "type": "estimador",
+                "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)"
+            },
+            {
+                "name": "estActivaE",
+                "name2": "EstActiva E",
+                "type": "estimador",
+                "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)"
             }
         ]
     },
