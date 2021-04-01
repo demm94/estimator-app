@@ -41,7 +41,7 @@ app.set('view engine', 'hbs');
 
 const scraper = async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: process.env.NO_VIEW_BROWSER,
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
     const page = await browser.newPage({waitUntil: 'domcontentloaded'});
@@ -57,10 +57,19 @@ const scraper = async () => {
         for(const indice of web.indices){
             await page.waitForSelector(indice.selector);
             const {value, isClose} = await page.evaluate((indice) => {
-                const value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                let value;
+                if(indice.name == "estActivaA" || indice.name == "estActivaE"){
+                    let lengthArray = document.querySelectorAll(indice.selector2).length;
+                    if(lengthArray > 0) value = document.querySelector(indice.selector2).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                    else value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                }else{
+                    value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                }
+
                 let isClose;
                 if(indice.type == "bolsa" && indice.selectorClose !== null) isClose = $(indice.selectorClose).exists();
                 else isClose = null;
+
                 return {
                     value: parseFloat(value),
                     isClose
@@ -167,7 +176,8 @@ const scraper = async () => {
 
 setInterval(function (){
     scraper().catch(error => { 
-        console.error("Something bad happend in SCRAPER", error); 
+        console.error("Something bad happend in SCRAPER", error);
+        process.exit(); 
     });
 }, process.env.TIME_EXECUTE);
 

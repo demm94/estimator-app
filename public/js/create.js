@@ -62,6 +62,8 @@ socket.on('test:message', function (response) {
             </div>
         `);
     }
+
+    getDolarValue();
 });
 
 const updateData = () => {
@@ -86,7 +88,7 @@ const updateData = () => {
                 else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
                 $('#index-rows').append(`
                     <div class="col-3 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                        <div class="card text-center h-100">
+                        <div id="index-${name}" class="card text-center h-100">
                             <div class="card-body py-2 px-0">
                             <h6 class="card-title">${object.name}</h6>
                             ${indicador}
@@ -132,16 +134,38 @@ const updateData = () => {
             }
         },
         complete: function(){
+            
+        }
+    });
+};
+
+const getDolarValue = () => {
+    $.ajax({
+        type: 'GET',
+        url: 'https://apps.bolchile.com/api/v1/dolarstatd2/#',
+        beforeSend: function () {
+        },
+        success: function (response) {
+            const data = response[0];
+            let card = document.querySelector('#index-usdClp > .card-body h6');
+            card.innerHTML+= ` <span class="badge rounded-pill bg-primary"> $${data.cp}</span>`;         
+        },
+        complete: function(){
+            
         }
     });
 };
 
 updateData();
+getDolarValue();
 
 const btnUpdate = document.getElementById('btn-update');
 
 btnUpdate.addEventListener('click', () => {
     console.log("click");
     updateData();
+    getDolarValue();
     updateDataChart();
 });
+
+

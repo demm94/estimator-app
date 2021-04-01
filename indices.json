@@ -193,13 +193,15 @@
                 "name": "estActivaA",
                 "name2": "EstActiva A",
                 "type": "estimador",
-                "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)"
+                "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)",
+                "selector2": "body > table:nth-child(1) > tbody > tr:nth-child(6) > td:nth-child(4)"
             },
             {
                 "name": "estActivaE",
                 "name2": "EstActiva E",
                 "type": "estimador",
-                "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)"
+                "selector": "body > table:nth-child(9) > tbody > tr:nth-child(5) > td:nth-child(4)",
+                "selector2": "body > table:nth-child(9) > tbody > tr:nth-child(6) > td:nth-child(4)"
             }
         ]
     },

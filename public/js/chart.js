@@ -9,11 +9,11 @@ var chart = new Chart(ctx, {
         labels: ['D'],
         datasets: [{
             label: 'aefp A',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 102, 0)',
             data: [1]
         },{
             label: 'EstActiva A',
-            borderColor: 'rgb(0, 179, 71)',
+            borderColor: 'rgb(147, 112, 216)',
             data: [3]
         }]
     },
@@ -23,7 +23,6 @@ var chart = new Chart(ctx, {
         scales: {
             yAxes: [{
                 ticks: {
-                    // Include a dollar sign in the ticks
                     callback: function(value, index, values) {
                         return `${value}%`;
                     }
