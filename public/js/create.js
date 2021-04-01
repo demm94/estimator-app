@@ -18,7 +18,7 @@ socket.on('test:message', function (response) {
             else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
             $('#index-rows').append(`
                 <div class="col-3 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                    <div class="card text-center h-100">
+                    <div id="index-${name}" class="card text-center h-100">
                         <div class="card-body py-2 px-0">
                         <h6 class="card-title">${object.name}</h6>
                         ${indicador}
