@@ -8,35 +8,40 @@
                 "name2": "Nikkei 225",
                 "type": "bolsa",
                 "selector": "td.pid-178-pcp",
-                "selectorClose": "#pair_178 > td.icon > span.redClockIcon"
+                "selectorClose": "#pair_178 > td.icon > span.redClockIcon",
+                "url": "https://es.investing.com/indices/japan-ni225"
             },
             {
                 "name": "shanghai",
                 "name2": "Shanghai",
                 "type": "bolsa",
                 "selector": "td.pid-40820-pcp",
-                "selectorClose": "#pair_40820 > td.icon > span.redClockIcon"
+                "selectorClose": "#pair_40820 > td.icon > span.redClockIcon",
+                "url": "https://es.investing.com/indices/shanghai-composite"
             },
             {
                 "name": "dax",
                 "name2": "DAX",
                 "type": "bolsa",
                 "selector": "td.pid-172-pcp",
-                "selectorClose": "#pair_172 > td.icon > span.redClockIcon"
+                "selectorClose": "#pair_172 > td.icon > span.redClockIcon",
+                "url": "https://es.investing.com/indices/germany-30"
             },
             {
                 "name": "eurostoxx",
                 "name2": "Euro Stoxx 50",
                 "type": "bolsa",
                 "selector": "td.pid-175-pcp",
-                "selectorClose": "#pair_175 > td.icon > span.redClockIcon"
+                "selectorClose": "#pair_175 > td.icon > span.redClockIcon",
+                "url": "https://es.investing.com/indices/eu-stoxx50"
             },
             {
                 "name": "ipsa",
                 "name2": "S&P CLX IPSA",
                 "type": "bolsa",
                 "selector": "td.pid-14767-pcp",
-                "selectorClose": "#pair_14767 > td.icon > span.redClockIcon"
+                "selectorClose": "#pair_14767 > td.icon > span.redClockIcon",
+                "url": "https://es.investing.com/indices/ipsa"
             }
         ]
     },
@@ -49,7 +54,8 @@
                 "name2": "iShares MSCI ACWI",
                 "type": "bolsa",
                 "selector": "span.pid-40659-pcp",
-                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
+                "url": "https://es.investing.com/etfs/ishares-msci-acwi-index-fund"
             }
         ]
     },
@@ -62,7 +68,8 @@
                 "name2": "Petróleo Crudo WTI",
                 "type": "bolsa",
                 "selector": "span.pid-8849-pcp",
-                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
+                "url": "https://es.investing.com/commodities/crude-oil"
             }
         ]
     },
@@ -75,7 +82,8 @@
                 "name2": "Cobre",
                 "type": "bolsa",
                 "selector": "span.pid-8831-pcp",
-                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
+                "url": "https://es.investing.com/commodities/copper"
             }
         ]
     },
@@ -88,7 +96,8 @@
                 "name2": "Índice Dólar",
                 "type": "bolsa",
                 "selector": "span.pid-8827-pcp",
-                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
+                "url": "https://es.investing.com/currencies/us-dollar-index"
             }
         ]
     },
@@ -101,7 +110,8 @@
                 "name2": "USD/CLP",
                 "type": "bolsa",
                 "selector": "span.pid-2110-pcp",
-                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon"
+                "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
+                "url": "https://es.investing.com/currencies/usd-clp"
             }
         ]
     },

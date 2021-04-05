@@ -80,7 +80,8 @@ const scraper = async () => {
                 bolsa[indice.name] = {
                     value,
                     name: indice.name2,
-                    isClose
+                    isClose,
+                    url: indice.url
                 };
             }
             else if(indice.type == "estimador"){

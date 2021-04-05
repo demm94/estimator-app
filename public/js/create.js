@@ -16,6 +16,8 @@ socket.on('test:message', function (response) {
 
             if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
             else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+
+            let link = (object.url) ? `<a href=${object.url} class="stretched-link"></a>`: '';
             $('#index-rows').append(`
                 <div class="col-3 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                     <div id="index-${name}" class="card text-center h-100">
@@ -23,6 +25,7 @@ socket.on('test:message', function (response) {
                         <h6 class="card-title">${object.name}</h6>
                         ${indicador}
                         ${clock}
+                        ${link}
                         </div>
                     </div>
                 </div>
@@ -86,6 +89,8 @@ const updateData = () => {
 
                 if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
                 else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+
+                let link = (object.url) ? `<a href=${object.url} class="stretched-link"></a>`: '';
                 $('#index-rows').append(`
                     <div class="col-3 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                         <div id="index-${name}" class="card text-center h-100">
@@ -93,6 +98,7 @@ const updateData = () => {
                             <h6 class="card-title">${object.name}</h6>
                             ${indicador}
                             ${clock}
+                            ${link}
                             </div>
                         </div>
                     </div>
