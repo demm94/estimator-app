@@ -7,7 +7,7 @@
                 "name": "nikkei",
                 "name2": "Nikkei 225",
                 "type": "bolsa",
-                "selector": "td.pid-178-pcp",
+                "selector": "#pair_178 > td.pid-178-pcp",
                 "selectorClose": "#pair_178 > td.icon > span.redClockIcon",
                 "url": "https://es.investing.com/indices/japan-ni225"
             },
@@ -15,7 +15,7 @@
                 "name": "shanghai",
                 "name2": "Shanghai",
                 "type": "bolsa",
-                "selector": "td.pid-40820-pcp",
+                "selector": "#pair_40820 > td.pid-40820-pcp",
                 "selectorClose": "#pair_40820 > td.icon > span.redClockIcon",
                 "url": "https://es.investing.com/indices/shanghai-composite"
             },
@@ -23,7 +23,7 @@
                 "name": "dax",
                 "name2": "DAX",
                 "type": "bolsa",
-                "selector": "td.pid-172-pcp",
+                "selector": "#pair_172 > td.pid-172-pcp",
                 "selectorClose": "#pair_172 > td.icon > span.redClockIcon",
                 "url": "https://es.investing.com/indices/germany-30"
             },
@@ -31,7 +31,7 @@
                 "name": "eurostoxx",
                 "name2": "Euro Stoxx 50",
                 "type": "bolsa",
-                "selector": "td.pid-175-pcp",
+                "selector": "#pair_175 > td.pid-175-pcp",
                 "selectorClose": "#pair_175 > td.icon > span.redClockIcon",
                 "url": "https://es.investing.com/indices/eu-stoxx50"
             },
@@ -39,7 +39,7 @@
                 "name": "ipsa",
                 "name2": "S&P CLX IPSA",
                 "type": "bolsa",
-                "selector": "td.pid-14767-pcp",
+                "selector": "#pair_14767 > td.pid-14767-pcp",
                 "selectorClose": "#pair_14767 > td.icon > span.redClockIcon",
                 "url": "https://es.investing.com/indices/ipsa"
             }
@@ -149,31 +149,31 @@
                 "name": "bcu10Actual",
                 "name2": "Tasa BCU 10 Actual",
                 "type": "otros",
-                "selector": "tr:nth-child(60) > td:nth-child(8)"
+                "selector": "tr:nth-child(61) > td:nth-child(8)"
             },
             {
                 "name": "bcu10Anterior",
                 "name2": "Tasa BCU 10 Anterior",
                 "type": "otros",
-                "selector": "tr:nth-child(60) > td:nth-child(7)"
+                "selector": "tr:nth-child(61) > td:nth-child(7)"
             },
             {
                 "name": "bcu5var",
                 "name2": "BCU 5 Var",
                 "type": "otros",
-                "selector": "tr:nth-child(58) > td:nth-child(9)"
+                "selector": "tr:nth-child(59) > td:nth-child(9)"
             },
             {
                 "name": "bcu10var",
                 "name2": "BCU 10 Var",
                 "type": "otros",
-                "selector": "tr:nth-child(60) > td:nth-child(9)"
+                "selector": "tr:nth-child(61) > td:nth-child(9)"
             },
             {
                 "name": "bcu20var",
                 "name2": "BCU 20 Var",
                 "type": "otros",
-                "selector": "tr:nth-child(62) > td:nth-child(9)"
+                "selector": "tr:nth-child(63) > td:nth-child(9)"
             }
         ]
     },
