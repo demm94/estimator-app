@@ -135,14 +135,14 @@
                 "name": "dolarAvg",
                 "name2": "Dólar Prom",
                 "type": "bolsa",
-                "selector": "tr:nth-child(56) > td:nth-child(4)",
+                "selector": "tr:nth-child(57) > td:nth-child(4)",
                 "selectorClose": null
             },
             {
                 "name": "dolarHolgura",
                 "name2": "Holgura",
                 "type": "bolsa",
-                "selector": "tr:nth-child(64) > td:nth-child(4)",
+                "selector": "tr:nth-child(65) > td:nth-child(4)",
                 "selectorClose": null
             },
             {
