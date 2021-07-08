@@ -39,148 +39,143 @@ require('./hbs/helpers');
 // Express HBS Engine
 app.set('view engine', 'hbs');
 
+
 const scraper = async () => {
+    
     const browser = await puppeteer.launch({
         headless: process.env.NO_VIEW_BROWSER,
         args: ['--no-sandbox','--disable-setuid-sandbox']
     });
-    try {
-        const page = await browser.newPage({waitUntil: 'domcontentloaded'});
-        await page.setDefaultNavigationTimeout(0);
-        let count = 0;
-        let total = websites.length;
-        let bolsa = {};
-        let estimadores = {};
-        let estimadores2 = {};
-        let otros = {}
-        for(const web of websites){
-            await page.goto(web.url);
-            for(const indice of web.indices){
-                await page.waitForSelector(indice.selector);
-                const {value, isClose} = await page.evaluate((indice) => {
-                    let value;
-                    if(indice.name == "estActivaA" || indice.name == "estActivaE"){
-                        let lengthArray = document.querySelectorAll(indice.selector2).length;
-                        if(lengthArray > 0) value = document.querySelector(indice.selector2).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
-                        else value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
-                    }else{
-                        value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
-                    }
     
-                    let isClose;
-                    if(indice.type == "bolsa" && indice.selectorClose !== null) isClose = $(indice.selectorClose).exists();
-                    else isClose = null;
-    
-                    return {
-                        value: parseFloat(value),
-                        isClose
-                    }
-                }, indice);
-                console.log(indice.name + `: ${value} - ${isClose}`);
-                if(indice.type == "bolsa") {
-                    bolsa[indice.name] = {
-                        value,
-                        name: indice.name2,
-                        isClose,
-                        url: indice.url
-                    };
-                }
-                else if(indice.type == "estimador"){
-                    estimadores[indice.name] = {
-                        value,
-                        name: indice.name2
-                    };
+    const page = await browser.newPage({waitUntil: 'domcontentloaded'});
+    await page.setDefaultNavigationTimeout(0);
+    let count = 0;
+    let total = websites.length;
+    let bolsa = {};
+    let estimadores = {};
+    let estimadores2 = {};
+    let otros = {}
+    for(const web of websites){
+        await page.goto(web.url);
+        for(const indice of web.indices){
+            await page.waitForSelector(indice.selector);
+            const {value, isClose} = await page.evaluate((indice) => {
+                let value;
+                if(indice.name == "estActivaA" || indice.name == "estActivaE"){
+                    let lengthArray = document.querySelectorAll(indice.selector2).length;
+                    if(lengthArray > 0) value = document.querySelector(indice.selector2).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                    else value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
                 }else{
-                    otros[indice.name] = {
-                        value,
-                        name: indice.name2
-                    }
+                    value = document.querySelector(indice.selector).textContent.replace(/[\(|\%\|)]/g,'').replace(',','.');
+                }
+
+                let isClose;
+                if(indice.type == "bolsa" && indice.selectorClose !== null) isClose = $(indice.selectorClose).exists();
+                else isClose = null;
+
+                return {
+                    value: parseFloat(value),
+                    isClose
+                }
+            }, indice);
+            console.log(indice.name + `: ${value} - ${isClose}`);
+            if(indice.type == "bolsa") {
+                bolsa[indice.name] = {
+                    value,
+                    name: indice.name2,
+                    isClose,
+                    url: indice.url
+                };
+            }
+            else if(indice.type == "estimador"){
+                estimadores[indice.name] = {
+                    value,
+                    name: indice.name2
+                };
+            }else{
+                otros[indice.name] = {
+                    value,
+                    name: indice.name2
                 }
             }
-            console.log("contador: ",count);
-            count++;
         }
-        if(count == total){
-            console.log("Cierrate browser");
-            await browser.close();
-            console.log(bolsa);
-            console.log(estimadores);
-            console.log(otros);
-        }
+        console.log("contador: ",count);
+        count++;
+    }
+    if(count == total){
+        console.log("Cierrate browser");
+        await browser.close();
+        console.log(bolsa);
+        console.log(estimadores);
+        console.log(otros);
+    }
+
+    // CÁLCULO DE ESTIMADORES
     
-        // CÁLCULO DE ESTIMADORES
-        
-        estimadores2["estimadorA1"] = {
-            name: "Estimador A1",
-            value: estimatorA1(bolsa)
-        };
-        estimadores2["estimadorE1"] = {
-            name: "Estimador E1",
-            value: estimatorE1(otros)
-        };
-        estimadores2["estimadorA2"] = {
-            name: "Estimador A2",
-            value: estimatorA2(bolsa)
-        };
-        estimadores2["estimadorE2"] = {
-            name: "Estimador E2",
-            value: estimatorE2(otros)
-        };
-    
-        // SE OBTIENE UN TIEMPO APROXIMADO DE TOMA DE DATA
-        const time = new Date().valueOf();
-    
-        // SE ALMACENAN LOS DATOS EN UN FICHERO
-        const fileName = path.join(__dirname, 'data.json');
-        fs.writeFile(fileName, JSON.stringify({
+    estimadores2["estimadorA1"] = {
+        name: "Estimador A1",
+        value: estimatorA1(bolsa)
+    };
+    estimadores2["estimadorE1"] = {
+        name: "Estimador E1",
+        value: estimatorE1(otros)
+    };
+    estimadores2["estimadorA2"] = {
+        name: "Estimador A2",
+        value: estimatorA2(bolsa)
+    };
+    estimadores2["estimadorE2"] = {
+        name: "Estimador E2",
+        value: estimatorE2(otros)
+    };
+
+    // SE OBTIENE UN TIEMPO APROXIMADO DE TOMA DE DATA
+    const time = new Date().valueOf();
+
+    // SE ALMACENAN LOS DATOS EN UN FICHERO
+    const fileName = path.join(__dirname, 'data.json');
+    fs.writeFile(fileName, JSON.stringify({
+        bolsa,
+        estimadores,
+        estimadores2,
+        otros,
+        time
+    }), (err) => {
+        if (err) throw new Error('Error al grabar', err);
+    });
+
+    // CREAMOS UN OBJETO FONDO
+    Fondo.create({
+        aefpa: estimadores.aefpA.value,
+        estacta: estimadores.estActivaA.value,
+        time
+        }, (e, obj) => {
+            if(e) console.log(e);
+            // Ya creado el bojeto fondo
+            // Escribo la data en socket para gráfico
+            Fondo.find({}, 'aefpa estacta time')
+            .sort({_id: -1})
+            .limit(40)
+            .exec((err, data) => {
+                if(err) console.log(err);
+                io.sockets.emit('data:chart', {
+                    data: data.reverse()
+                });
+            })
+    });
+
+    // Escribo a todos los sockets
+    io.sockets.emit('test:message', {
+        data: {
             bolsa,
             estimadores,
             estimadores2,
             otros,
             time
-        }), (err) => {
-            if (err) throw new Error('Error al grabar', err);
-        });
-    
-        // CREAMOS UN OBJETO FONDO
-        Fondo.create({
-            aefpa: estimadores.aefpA.value,
-            estacta: estimadores.estActivaA.value,
-            time
-            }, (e, obj) => {
-                if(e) console.log(e);
-                // Ya creado el bojeto fondo
-                // Escribo la data en socket para gráfico
-                Fondo.find({}, 'aefpa estacta time')
-                .sort({_id: -1})
-                .limit(40)
-                .exec((err, data) => {
-                    if(err) console.log(err);
-                    io.sockets.emit('data:chart', {
-                        data: data.reverse()
-                    });
-                })
-        });
-    
-        // Escribo a todos los sockets
-        io.sockets.emit('test:message', {
-            data: {
-                bolsa,
-                estimadores,
-                estimadores2,
-                otros,
-                time
-            }
-        });
-    
-        console.log("SCRAPER DONE!");
-    } catch (error) {
-        console.error("Something bad happend in SCRAPER", error);
-        await browser.close();
-        setTimeout(() => {
-            process.kill(process.pid, 'SIGKILL');
-        }, 10000);
-    }
+        }
+    });
+
+    console.log("SCRAPER DONE!");
 };
 
 const estimatorA1 = (bolsa) => {
@@ -252,4 +247,10 @@ io.on('connection', (socket) => {
     console.log("New Connection ", socket.id);
 });
 
-setInterval(scraper, process.env.TIME_EXECUTE);
+setInterval(() => {
+    scraper().
+        catch((e) => {
+            console.error("Something bad happend in SCRAPER", e);
+            process.exit();
+        })
+}, process.env.TIME_EXECUTE);
