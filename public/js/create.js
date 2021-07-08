@@ -33,21 +33,41 @@ socket.on('test:message', function (response) {
         }
 
         $("#estimadores1").empty();
-        for (var [name, object] of Object.entries(response.data.estimadores)) {
-            let indicador;
-            if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
-            else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
-            $('#estimadores1').append(`
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
-                    <div class="card text-center">
-                        <div class="card-body">
-                        <h6 class="card-title">${object.name}</h6>
-                        <p class="card-text">${indicador}</p>
+            let promAcfondos = 0;
+            for (var [name, object] of Object.entries(response.data.estimadores)) {
+                let indicador;
+                if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+                if(/acfondos/.test(name)){
+                    promAcfondos+=object.value/2;
+                }
+                $('#estimadores1').append(`
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                            <h6 class="card-title">${object.name}</h6>
+                            <p class="card-text">${indicador}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `);
-        }
+                `);
+            }
+
+            // ***************** SACAR DESPÚES *******************
+            let indicador;
+            if(promAcfondos >= 0) indicador = `<span class="badge bg-success">${promAcfondos.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${promAcfondos.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+
+            $('#estimadores1 > div:nth-child(4)').after(`<div class="col-4 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                            <h6 class="card-title">Promedio C</h6>
+                            <p class="card-text">${indicador}</p>
+                            </div>
+                        </div>
+                    </div>`);
+
+            // ***************************************************
 
     $("#estimadores2").empty();
     for (var [name, object] of Object.entries(response.data.estimadores2)) {
@@ -106,12 +126,16 @@ const updateData = () => {
             }
     
             $("#estimadores1").empty();
+            let promAcfondos = 0;
             for (var [name, object] of Object.entries(response.data.estimadores)) {
                 let indicador;
                 if(object.value >= 0) indicador = `<span class="badge bg-success">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
                 else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+                if(/acfondos/.test(name)){
+                    promAcfondos+=object.value/2;
+                }
                 $('#estimadores1').append(`
-                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 my-1 px-1 px-md-3">
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
                         <div class="card text-center">
                             <div class="card-body">
                             <h6 class="card-title">${object.name}</h6>
@@ -121,6 +145,23 @@ const updateData = () => {
                     </div>
                 `);
             }
+
+            // ***************** SACAR DESPÚES *******************
+
+            let indicador;
+            if(promAcfondos >= 0) indicador = `<span class="badge bg-success">${promAcfondos.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${promAcfondos.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+
+            $('#estimadores1 > div:nth-child(4)').after(`<div class="col-4 col-sm-4 col-md-3 col-lg-3 my-1 px-1 px-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                            <h6 class="card-title">Promedio C</h6>
+                            <p class="card-text">${indicador}</p>
+                            </div>
+                        </div>
+                    </div>`);
+
+            // ***************************************************
     
             $("#estimadores2").empty();
             for (var [name, object] of Object.entries(response.data.estimadores2)) {

@@ -10270,5 +10270,11 @@ fieldset:disabled .btn {
   #index-rows h6, #index-rows .h6 {
     font-size: 0.45rem;
   }
+  #estimadores1 h6, #estimadores1 .h6 {
+    font-size: 0.8rem;
+  }
+  #estimadores1 p span {
+    font-size: 0.8em;
+  }
 }
 /*# sourceMappingURL=custom.css.map */

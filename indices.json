@@ -126,6 +126,12 @@
                 "selector": "tr:nth-child(5) > td:nth-child(4)"
             },
             {
+                "name": "aefpC",
+                "name2": "AEfp C",
+                "type": "estimador",
+                "selector": "tr:nth-child(7) > td:nth-child(4)"
+            },
+            {
                 "name": "aefpE",
                 "name2": "AEfp E",
                 "type": "estimador",
@@ -205,6 +211,13 @@
                 "type": "estimador",
                 "selector": "body > table:nth-child(1) > tbody > tr:nth-child(5) > td:nth-child(4)",
                 "selector2": "body > table:nth-child(1) > tbody > tr:nth-child(6) > td:nth-child(4)"
+            },
+            {
+                "name": "estActivaC",
+                "name2": "EstActiva C",
+                "type": "estimador",
+                "selector": "body > table:nth-child(5) > tbody > tr:nth-child(5) > td:nth-child(4)",
+                "selector2": "body > table:nth-child(5) > tbody > tr:nth-child(6) > td:nth-child(4)"
             },
             {
                 "name": "estActivaE",
