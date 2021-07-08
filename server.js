@@ -177,7 +177,9 @@ const scraper = async () => {
     } catch (error) {
         console.error("Something bad happend in SCRAPER", error);
         await browser.close();
-        process.kill(process.pid, 'SIGKILL');
+        setTimeout(() => {
+            process.kill(process.pid, 'SIGKILL');
+        }, 10000);
     }
 };
 
