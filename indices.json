@@ -67,7 +67,7 @@
                 "name": "petroleoCrudo",
                 "name2": "Petróleo Crudo WTI",
                 "type": "bolsa",
-                "selector": "span.pid-8849-pcp",
+                "selector": "span.instrument-price_change-percent__19cas",
                 "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
                 "url": "https://es.investing.com/commodities/crude-oil"
             }
@@ -81,7 +81,7 @@
                 "name": "cobre",
                 "name2": "Cobre",
                 "type": "bolsa",
-                "selector": "span.pid-8831-pcp",
+                "selector": "span.instrument-price_change-percent__19cas",
                 "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
                 "url": "https://es.investing.com/commodities/copper"
             }

@@ -70,7 +70,10 @@ const scraper = async () => {
                 }
 
                 let isClose;
-                if(indice.type == "bolsa" && indice.selectorClose !== null) isClose = $(indice.selectorClose).exists();
+                if(indice.type == "bolsa" && indice.selectorClose !== null) {
+                    //isClose = $(indice.selectorClose).exists();
+                    isClose = (document.querySelector(indice.selectorClose) != null) ? true : false;
+                } 
                 else isClose = null;
 
                 return {
