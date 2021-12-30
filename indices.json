@@ -109,7 +109,7 @@
                 "name": "usdClp",
                 "name2": "USD/CLP",
                 "type": "bolsa",
-                "selector": "span.pid-2110-pcp",
+                "selector": "span.instrument-price_change-percent__19cas",
                 "selectorClose": "#quotes_summary_current_data > div.instrumentDataDetails > div.left.current-data > div.bottom.lighterGrayFont.arial_11 > span.redClockBigIcon",
                 "url": "https://es.investing.com/currencies/usd-clp"
             }
