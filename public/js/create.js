@@ -21,7 +21,7 @@ socket.on('test:message', function (response) {
                 if (object.value != null) {
                     indicador = `<span class="badge bg-secondary shadow-lg">${object.value}%</span>`
                 } else {
-                    indicador = `No Data 😫`
+                    indicador = `💩💩💩`
                 }
             }
 
@@ -122,7 +122,7 @@ const updateData = () => {
                     if (object.value != null) {
                         indicador = `<span class="badge bg-secondary shadow-lg">${object.value}%</span>`
                     } else {
-                        indicador = `No Data 😫`
+                        indicador = `💩💩💩`
                     }
                 }
 
