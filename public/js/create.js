@@ -14,8 +14,16 @@ socket.on('test:message', function (response) {
             else if(object.isClose == false) clock = `<i style="font-size: 0.8rem; color: green" class="bi bi-clock"></i>`;
             else clock = "";
 
-            if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
-            else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+            if (object.value) {
+                if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+            } else {
+                if (object.value != null) {
+                    indicador = `<span class="badge bg-secondary shadow-lg">${object.value}%</span>`
+                } else {
+                    indicador = `No Data 😫`
+                }
+            }
 
             let link = (object.url) ? `<a href=${object.url} class="stretched-link"></a>`: '';
             $('#index-rows').append(`
@@ -106,9 +114,17 @@ const updateData = () => {
                 if(object.isClose == true) clock = `<i style="font-size: 0.8rem; color: red;" class="bi bi-clock"></i>`;
                 else if(object.isClose == false) clock = `<i style="font-size: 0.8rem; color: green" class="bi bi-clock"></i>`;
                 else clock = "";
-
-                if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
-                else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+                
+                if (object.value) {
+                    if(object.value >= 0) indicador = `<span class="badge bg-success shadow-lg">${object.value.toFixed(2)}% <i class="bi bi-caret-up-fill"></i></span>`;
+                    else indicador = `<span class="badge bg-danger">${object.value.toFixed(2)}% <i class="bi bi-caret-down-fill"></i></span>`;
+                } else {
+                    if (object.value != null) {
+                        indicador = `<span class="badge bg-secondary shadow-lg">${object.value}%</span>`
+                    } else {
+                        indicador = `No Data 😫`
+                    }
+                }
 
                 let link = (object.url) ? `<a href=${object.url} class="stretched-link"></a>`: '';
                 $('#index-rows').append(`
@@ -181,7 +197,7 @@ const updateData = () => {
             }
         },
         complete: function(){
-            
+            getDolarValue();
         }
     });
 };
@@ -195,7 +211,7 @@ const getDolarValue = () => {
         success: function (response) {
             const data = response[0];
             let card = document.querySelector('#index-usdClp > .card-body h6');
-            card.innerHTML+= ` <span class="badge rounded-pill bg-primary"> $${data.cp}</span>`;         
+            card.innerHTML = `USD/CLP <span class="badge rounded-pill bg-primary"> $${data.cp}</span>`;         
         },
         complete: function(){
             
@@ -204,7 +220,6 @@ const getDolarValue = () => {
 };
 
 updateData();
-getDolarValue();
 
 const btnUpdate = document.getElementById('btn-update');
 
