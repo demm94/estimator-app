@@ -150,7 +150,7 @@ const scraper = async () => {
     // CREAMOS UN OBJETO FONDO
     Fondo.create({
         aefpa: estimadores.aefpA.value,
-        estacta: estimadores.estActivaA.value,
+        estacta: estimadores?.estActivaA?.value,
         time
         }, (e, obj) => {
             if(e) console.log(e);
